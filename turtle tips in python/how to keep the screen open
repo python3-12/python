@@ -1,0 +1,1 @@
+if you want to keep the turtle window opened, then use turtle.mainloop() or turtle.done() and put it as the last line of code.

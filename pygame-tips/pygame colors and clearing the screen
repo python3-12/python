@@ -1,0 +1,10 @@
+# Pygame colors
+In Pygame, we use RGB the first set of arguments when you are saying the colors is for the color red, the second is for the green, 
+and the last is for the blue. It go’s from zero too two hundred fifty five.
+Two hundred fifty five is the brightest, while zero is the darkest. 
+
+Clearing the screen
+
+Screen.fill() overwrites the screen with a certain color so that you won’t see a billion copy’s
+of your self on the screen whenever you move.
+Pygame.display.flip() makes it where it shows the changes you’ve made.

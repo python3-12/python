@@ -1,0 +1,5 @@
+this happens when you do something like this:
+x, y = (1, 2, 3) 
+this will give you an error because the amount of 
+variables are less then the amount of tuples.
+to fix it make the amount of variables equal to the amount of elements in the tuple, or just make one variable equal to those elements

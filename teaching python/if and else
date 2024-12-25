@@ -1,0 +1,18 @@
+so, you having trouble making the computer do stuff only if stuff happen?
+No problem, if and else can handle it!for example:
+the_fun = input("what is your favorite, disney, universal, or fun spot?")
+if the_fun == "disney" :
+  print(oh, cool)
+if the_fun == "universal" :
+  print(hey, me too!!)
+if the_fun == "fun spot" :
+  print(what, that place is fruad spot!!)
+else:
+  print("sorry, that's not an option.")
+So now, if I say disney it will say: oh,cool
+if I say universal it will say:hey, me too!!
+And so on.The else says if they say anything else than say sorry, that's not an option
+Remember its ==, not =.
+REMEMBER THE TAB!!!
+the colin is basically saying: hey this is what it equals!
+you can put defs lists and tuples in if and else to.

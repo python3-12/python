@@ -1,0 +1,5 @@
+Images and sound
+
+To load a sound, just use pygame.mixer.init().
+Then skip a few lines and put a variable equal to pygame.mixer.sound(“”) and inside the quatation marks put the path to the sound you downloaded.
+Then, when you want to play the sound, just say the name of the variable that you just defined.play().

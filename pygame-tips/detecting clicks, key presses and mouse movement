@@ -1,0 +1,11 @@
+Detecting clicks, key presses,
+and mouse movements:
+
+Events have a couple of diferent types one is MOUSEMOTION, two anothers are KEYDOWN and KEYUP.
+There is also QUIT.
+In Pygame to detect if a mouse moved, you can use pygame.MOUSEMOTION events.
+To detect key presses check for pygame.KEY DOWN events. 
+To detect when you let go of the key, use pygame.KEY UP events.
+To detect when you click the x at the top right corner, use the pygame.event.QUIT event.
+TO make it where when you click that x, you leave the game or whatever you are making, then make an if statement saying if the event is equal to pygame.QUIT put the
+collon and then skip a line and do the tab, then finally, write pygame.quit, no uppercase this time.

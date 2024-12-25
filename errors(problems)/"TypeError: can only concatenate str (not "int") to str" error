@@ -1,0 +1,9 @@
+if this is common problem that is a quick fix.
+this is one way it can happen:
+result = "string" + 5
+the reason it will give you this error is because you can't add a string to a number, like
+if someone asked you what 1 + me equals, it would be very confusing.
+
+the way to fix it is by doing this:
+result = "string" + str(5)
+this is telling the computer to add the word five and string.

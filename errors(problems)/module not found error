@@ -1,0 +1,7 @@
+this just means that you imported something that python could not find.
+there are two ways to this can happen, you either tried to import a module that doesn't exist, or you imported a module that you need to pip install.
+if you imported a module that doesn't exist, it is possible that you just misspelled, so resspell it. otherwise, that module doesn't exist and errase it.
+
+if you need to pip install it, just go into your terminal and write:
+
+pip install the name of the module you need to install

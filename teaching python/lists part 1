@@ -1,0 +1,17 @@
+do you get tired of creating variables?
+no need to worry, because lists can be many things!
+if I put:
+food = ["pizza","pasta","turkey"]
+than it would have the same response as variables, it would say nothing.
+it needs the brackets just like input and print do.
+if I wanted to say just pasta then I could use print and say this:
+food = ["pizza","pasta","turkey"]
+print(food[1])
+the way I know this beacause each thing in the list has a number from 0 till the rest of them like this
+           0       1       2
+food = ["pizza","pasta","turkey"]
+but what if I want to add something?
+than I could do append!for example:
+food = ["pizza","pasta","turkey"]
+food.append("beef")
+this would make the list food also have beef in it!yum!!

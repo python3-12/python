@@ -1,0 +1,13 @@
+the function print tells the computer to say whatever is in the quatation marks or double quatation marks
+what is in the quatation marks are called strings.
+you also need ()
+if I said:
+print("hello world")
+then it would say: hello world
+and if you have numbers ONLY than it doesn't need quatation marks or double quatation marks, for example if I said:
+print(12345678910) It would still work,now that doesn't mean you can't have quatation marks its just a extra tip.
+If you put another double quatation mark in a double quatation
+If you get an error and you don't no why, maiby you put a capital P for print,well it has to be lowercase.
+if you want the computer to make the sentance come down a line then just put \n in the string where you want it to come down a line.
+Also print doesn't let the person answer,and that's why I'm talking about input right now.
+input is the same as print just leting the person answer.See you next time.

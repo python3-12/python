@@ -1,0 +1,30 @@
+if you want to do addition,subtraction,or multiplication, then here we go!
+Here is an example:
+print(20 + 18)
+print(20 - 18)
+This will actualy solve this!
+What if I want it to input it?
+Easy!All I need to do is this:
+j = input("what is 5 - 5?")
+if j == 0:
+  print("correct")
+else:
+  print("nope")
+and if I want it to do it until he answers correct then this:
+while True:
+  j = input("what is 5 - 5?")
+  if j == 0:
+    print("correct")
+    break
+  else:
+    print("nope")
+what if I wanted to do multiplacation, there 
+is no key for that. Well with shift eight that is the multiplication sighn!
+It looks like this:
+*
+What if want to do greaterthan and lessthan?
+here is what you could put:
+print(5 > 5)
+print(1 < 5)
+now for the 5 is greater than 5 it will say False, and for the 1 lessthan 5 it will say True!
+heres a tip you can't do equals.

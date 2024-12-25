@@ -1,0 +1,17 @@
+to create the screen, you need three lines of code.
+
+The first two are very important!
+The first line is just importing pygame.
+The second line is just to initialize pygame, to do this just write pygame.init()
+The third line of code is making a variable equal to pygame.display.set_mode(())
+Inside those the perantacies inside the perantacies, write how big you want your screen to be for exemple if I wrote:
+pygame.display.set_mode((500,300))
+then my screen would be 500 by 300 pixels big!
+
+This next line of code is optional, if you want to give your screen a name, then write:
+pygame.display.set_caption("whatever you want it to be named")
+this will pop up on the top of the screen. If you don't do it, then it will be called pygame window.
+
+This line of code is also optional, if you want to change the picture on the top left corner of the screen from a frog to something else, just
+write:
+pygame.display.set_icon("the path to the picture you want at the top left corner of the screen")

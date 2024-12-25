@@ -1,0 +1,18 @@
+to make your turtle window appear, you can use a variable equal to(i'm using wn):
+turtle.Screen()
+next, say the name of the variable and then a dot like this:
+wn.
+say this three times like this:
+wn = turtle.Screen()
+wn.bgcolor("blue")
+wn.title("teaching")
+wn.setup(700,700)
+
+wn.bgcolor tells it "I want this to be whatever color"
+here are some possible colors:
+red, green, blue, cyan, as well as options like lightgreen, turquoise, skyblue
+
+wn.title tells it I want to name this "whatever you put here" 
+the title is shown on the top of the window when it pops up,it's defalt is "python turtle graphics"
+
+wn.setup tells it I want the size of this screen to be this many by this many pixels

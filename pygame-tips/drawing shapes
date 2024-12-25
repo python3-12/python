@@ -1,0 +1,24 @@
+Drawing shapes
+
+You can use pygame.draw.rect() for a rectangle.
+the first set of arguments you put in the perentacies is the surface you want to draw it on.
+the second set of arguments you put in the perantacies is the color, and if you didn't know in there own perantacies that are inside the main perentacies.
+the third set of arguments you put in the perantacies is the x and y, in there another perantacies inside of the other one.
+the last set of arguments are put inside the same set of perantacies as the x and y, which is your width and hieght.
+
+for a circle pygame.draw.circle().
+the first set of arguments you put in the perentacies is the surface you want to draw it on.
+the second set of arguments you put in the perentacies is the color wich go's in its own set of perentacies inside the main ones.
+the third set of arguments you put in the perantacies is the x and y, wich also go in their own set of perentacies inside the main ones.
+the next set of arguments you put in the perantacies is the radius, wich says how much pixels it is from the center of the circle to the edge of the circle.
+now this last one is optional, but the last set of arguments you put in the perantacies is the width, this will determan how thick the circles outline is, for
+example, if you put zero, then the outline would be as big as possible and your circle will be completly filled.
+
+You can also do pygame.draw.line() for a line.
+the first  set of arguments you put in the perantacies is the surface you want to draw it on.
+the second set of arguments you put in the perantacies is the color wich is the same way as the rectangle and the circle.
+the third set of arguments you put in the perantacies is the position where the line starts in x and y in their own perentacies
+wich are inside the main ones and the position the line ends in x and y in their own perentacies
+wich are inside the main ones.
+
+for each of these, don't forget to put a comma before after each argument!

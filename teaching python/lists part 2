@@ -1,0 +1,13 @@
+welcome to part 2 of lists
+hey what if you wanted to remove something?
+then I use this function called pop!
+for example:
+food = ["pizza","pasta","turkey"]
+food.pop(2)
+this will delete turkey.It's the same number thing where each string has a number.
+now,what if the some  stuff I difine are a number?
+then make ONLY THE NUMBERS with no quatation marks.
+what if the whole thing is numbers?
+same thing as variables!
+tuples are the same thing as lists just you can't change the strings and instead of brackets you use these:
+()

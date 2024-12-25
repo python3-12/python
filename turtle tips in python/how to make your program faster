@@ -1,0 +1,9 @@
+if you want to make your program faster than put the name of the window variable.tracer() or turtle.tracer()
+zero is the fastest
+put the number in like this:
+variable_name.tracer(0)
+or like this:
+turtle.tracer(0)
+you must put:
+wn.update()
+at the first line of your while loop for it to work though, other wise it crashes.

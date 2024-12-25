@@ -1,0 +1,12 @@
+what if you want to make the variable actualy do something?
+did you know print and input can say what the variable equals?
+if I put this in:
+food = "pizza"
+print(food)
+guess what it will say, it will say pizza!
+with variables when you put them in stuff they're like numbers!
+no need to have quatation marks around them!
+you can also make variables equal to print and input!
+for example:
+food = input("so, what is your favorite food?")
+But if you make variables equal to print or input, you also make the computer say what the variable is equal while difining it!

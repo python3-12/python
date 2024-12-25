@@ -1,0 +1,3 @@
+if you want your turtle screen to dissapear, then just say turtle.bye()
+this will make the turtle window dissapear, but will give you errors if there is a while loop.
+these errors don't make your code stop working, they just are talking about how when the window closes the loop is still going.

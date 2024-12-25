@@ -1,0 +1,31 @@
+while loops can be quite difficult, but with this your gonna remember.
+here is a example of a while loop:
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+We are using variables combined with if and else and numbers!!
+That's allot!! But I will teach you it!
+In the example above, i is equal to one. The while i less than six thing means that when the variable i, difined as 1,is less than 6 he should do whatever is
+under the colin.The print i means, oops, you already know! The i += 1 thing means i,difined as 1, gets another +1 every time.
+Heres another example:
+i = 6
+while i > 1:
+  print(i)
+  i -= 1
+This is the same thing as += and lessthan just the opposite. -= means the same as += just instead of plus, its minus.
+But what if I want to do where it go's on forever?
+You just put this:
+while True:
+  print(097)
+Oh no now it go's on forever! heres how it is heplful, you use if and else!Heres and example:
+while True:
+  z = input("what do like most, universal, disney ,or fun spot?")
+  if z == "universal"or z =="disney"or z =="fun spot":
+    print("okay, good to know!")
+    break
+  else:
+    input("what do like most, universal, disney ,or fun spot?")
+The way this works is that it says that if the answer equals one of the above, then say: okay good to know!
+and it will break out of the loop(break is only in loops, and or is used to make it also if they say this!)
+But if I say something that it doesn't say above then it will ask me again!

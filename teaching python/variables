@@ -1,0 +1,4 @@
+a variable is when you say something equals something for example:
+  food = "pizza"
+when you use a variable he's not gonna say the quatation marks or pizza unless I use print, we will talk about that in the next episode.
+you can also say a variable equals a variable or say a variable equals print("what ever you want") same with input.

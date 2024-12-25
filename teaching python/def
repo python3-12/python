@@ -1,0 +1,8 @@
+def is to difine stuff like variables lists and tuples.
+The way it is different is because you can make it equal to print and input, for example:
+def pizza():
+  print("peperoni")
+then whenever I say pizza() it will say peperoni
+you need to say the open and close perantaces after the name of the def.
+if you want to make it say what the def equals then use print or input.
+Never ever forget the tab it is very important same with the colin not a semicolin(a colin is this : )

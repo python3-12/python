@@ -1,0 +1,29 @@
+first make a class like this:
+
+class Player(turtle.Turtle):
+    def __init__(self,spriteshape,color,x,y):
+            turtle.Turtle.__init__(self,shape = spriteshape)
+            self.speed(0)
+            self.penup()
+            self.color(color)
+            self.fd(0)
+            self.goto(x,y)
+            self.speed = 1
+
+second make a variable like this that is outside the class:
+
+player = Player("classic","aqua",0,0)
+  
+third make a def that is like this outside of the class:
+def move_right():
+  x = player.x -= 50
+  player.set_x(x)
+
+to detect key presses, use:
+turtle.onkeypress()
+you can also use:
+turtle.onkey()
+the difference of them is that "onkey" is where you have to click the key, take stop clicking the key, then click it again to make
+it where you move more then once. "onkeypress" is a thing where you can hold down the key so that you move more than once.
+in each one the first line of code inside the perantacies is the def, the next line of code is the key you want to be used.
+for the arrow keys, they all are first letter uppercase, but the rest have all lowercase.

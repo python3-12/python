@@ -1,0 +1,25 @@
+to make your player or enemys, do this:
+
+class Player(turtle.Turtle):
+    def __init__(self,spriteshape,color,x,y):
+            turtle.Turtle.__init__(self,shape = spriteshape)
+            self.speed(0)
+            self.penup()
+            self.color(color)
+            self.goto(x,y)
+
+this is a class.
+self.speed is the animation speed
+self.penup is telling the computer not to draw a line every where it go's.
+self.color is like the color of the thing
+self.goto is the x and y corridanants you will see it spawn on the screen
+
+the stuff in inside the brackets for the init are the stuff that you get to answer, like for example in the self.goto(x,y),
+that is saying go to the x and y corridanants the guy says to, same thing with self.color(color) and the shape = spriteshape
+
+speaking of those, now I'm gonna tell you how to answer those things.
+the way you answer them is by doing this:
+
+player = Player("classic","aqua",0,0)
+
+this is saying player is equal to the class player, the shape is the classic, the color is aqua, and the position the player will spawn is zero, zero, the middle of the screen.

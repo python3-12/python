@@ -1,0 +1,4 @@
+this happens when you try to acess a atribute or method that doesn't exist.
+to fix it, make sure the attribute or method exists
+
+tip: atributes are the things you put after dots.

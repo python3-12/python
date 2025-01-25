@@ -1,3 +1,4 @@
 # python
-python coding is a thing you can use for coding.
-The folder in my repository named 'games' is games I made with python coding! 
+python is a coding language.
+this repository is packed with python stuff.
+

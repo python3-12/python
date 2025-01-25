@@ -18,7 +18,7 @@ wn.bgcolor("black")
 
 
 wn.title("SPACE INVADERS")
-#wn.register_shape(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\spaceinvaders-videogames.gif")
+
 turtle.tracer(0)
 
 #  Optional: Maximize window directly

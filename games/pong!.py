@@ -1,6 +1,8 @@
+import random
 import turtle
 import pygame# type: ignore
-import time
+import time, datetime
+#movie = input("do you want to watch a movie or music, or do you want to play?")
 start_time = time.time()
 pygame.mixer.init()
 wn = turtle.Screen()
@@ -18,6 +20,7 @@ paddle_a.color("white")
 paddle_a.penup()
 paddle_a.goto(-350,0)
 paddle_a.shapesize(stretch_wid=5,stretch_len=1)
+
 #paddle b
 paddle_b = turtle.Turtle()
 paddle_b.speed(0)
@@ -27,24 +30,28 @@ paddle_b.penup()
 paddle_b.goto(350,0)
 paddle_b.shapesize(stretch_wid=5,stretch_len=1)
 #ball
+ball = turtle.Turtle()
+ball.speed(0)
+ball.shape("circle")
+ball.color("green")
+ball.penup()
+ball.goto(-300,0)
+ball.dx = 0.3
+ball.dy = 0.2
+
 ball1 = turtle.Turtle()
 ball1.speed(0)
-ball1.shape("square")
+ball1.shape("circle")
 ball1.color("yellow")
 ball1.penup()
-ball1.goto(0,0)
-ball1.dx = 0.3
+ball1.goto(300,0)
+ball1.dx = -0.3
 ball1.dy = -0.2
 #Add another ball
-ball2 = turtle.Turtle()
-ball2.speed(0)
-ball2.shape("square")
-ball2.color('red')
-ball2.penup()
-ball2.goto(0,0)
-ball2.dx = -0.1
-ball2.dy = -0.2
-balls = [ball1,ball2]
+
+
+
+balls = [ball,ball1]
 
 pen = turtle.Turtle()
 pen.speed(0)
@@ -71,6 +78,24 @@ def paddle_b_down():
     paddle_b.sety(y)
 def bye():
     turtle.bye()
+miss_chance = 0.9
+def ai_move(paddle, ball):
+    # AI has a random chance to miss the ball
+    
+    if random.random() > miss_chance:  # 80% chance to move
+        if paddle.ycor() < ball.ycor() and paddle.ycor() < 250:  # Avoid paddle out of screen
+            if paddle == paddle_a:
+                paddle_a_up()
+            else:
+                paddle_b_up()
+        elif paddle.ycor() > ball.ycor() and paddle.ycor() > -240:  # Avoid paddle out of screen
+            if paddle == paddle_a:
+                paddle_a_down()
+            else:
+                paddle_b_down()
+
+
+
 
 # Keyboard bindings
 wn.listen()
@@ -78,7 +103,8 @@ wn.onkeypress(paddle_a_up, "w")
 wn.onkeypress(paddle_a_down, "s")
 wn.onkeypress(paddle_b_up, "Up")
 wn.onkeypress(paddle_b_down, "Down")
-wn.onkeypress(bye,"l")
+wn.onkeypress(bye,"/")
+
 while True:
     wn.update()
     for ball in balls:
@@ -88,13 +114,11 @@ while True:
         if ball.ycor() > 290:
             ball.sety(290)
             ball.dy *= -1
-            sound = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\explosion.mp3")
-            sound.play()
+            
         if ball.ycor() < -290:
             ball.sety(-290)
             ball.dy *= -1
-            soundl = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\explosion.mp3")
-            soundl.play()
+            
         if ball.xcor() > 350:
             ball.goto(0,0)
             ball.dx *= -1
@@ -112,37 +136,48 @@ while True:
         if ball.xcor() > 340 and ball.xcor() < 350 and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -40):
             ball.setx(340)
             ball.dx *= -1
-            sound3 = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\lazer.mp3")
-            sound3.play()
+            
         if ball.xcor() < -340 and ball.xcor() > -350 and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -40):
             ball.setx(-340)
             ball.dx *= -1
-            sound4 = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\lazer.mp3")
-            sound4.play()
-        if score_b > 10:
+            
+        if score_b == 50:
+            wn.clear()
+            wn.bgcolor("red")
+            pen.color("blue")
+            pen.goto(0,0)
+            pen.write('GAME OVER',align="Center",font=("Courier",70,"normal"))
+            time.sleep(2)
             turtle.bye()
-            break
-            
-        if score_b > 10:
+            #time.sleep(1)
             end_time = time.time()  # end the timer
+            elapsed_time = int(end_time - start_time)   # calculate the elapsed time
+            # a = datetime.datetime.fromtimestamp(start_time)
+            # b = datetime.datetime.fromtimestamp(end_time)
+            # readable_time= a.time()
+            # readable_time2= b.time()
+            # print(f"this is the end_time: {readable_time}, and this is the start_time: {readable_time2}")
+            print(f"Elapsed time: {elapsed_time} seconds")
+            break
+        
+    
+        
+        if score_a == 50:
+            wn.clear()
+            wn.bgcolor("red")
+            pen.color("blue")
+            pen.goto(0,0)
+            pen.write('You win',align="Center",font=("Courier",70,"normal"))
+            time.sleep(2)
+            turtle.bye()
 
-            elapsed_time = end_time - start_time   # calculate the elapsed time
             
-            print("Elapsed time:" + elapsed_time + "seconds")
-            turtle.end_poly()
             
 #AI player
-    closest_ball = balls[0]
+
     for ball in balls:
-        if ball.xcor() > closest_ball.xcor():
-            closest_ball = ball
+       
+        ai_move(paddle_b, random.choice(balls))
 
-    
-    if paddle_b.ycor() < closest_ball.ycor() and abs(paddle_b.ycor() - closest_ball.ycor()) > 10:
-        paddle_b_up()
-    elif paddle_b.ycor() > closest_ball.ycor() and abs(paddle_b.ycor() - closest_ball.ycor()) > 10:
-        paddle_b_down()
-
-    
 
     

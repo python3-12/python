@@ -1,0 +1,30 @@
+for loops are similair to while loops.
+here is an example of one:
+
+for i in range(10):
+  print(i)
+  
+this is a range for loop.
+heres a example of what it is saying:
+okay, I have ten donuts, for every donut people want me to deliver, I tell them on the phone what delivery number they are.
+get it?
+this will only print i nine times though, and if you want ten than you would make range 11.
+
+here is another type of four loop:
+
+for x in "banana":
+  print(x) 
+
+this is saying for every letter in the string banana, say that letter.
+this will priint banana in a way where the b is on one line, then the a is below it, and the n is below that, and so on.
+
+here is another type of for loop:
+
+fruits = ["pine apple", "banana", "water melon"]
+for x in fruits:
+  print(x) 
+  if x == "banana":
+    break
+
+this is saying for every string in the fruits list, print the string.
+but then it says that if it gets to banana, then break out of the loop.

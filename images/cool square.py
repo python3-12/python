@@ -3,23 +3,28 @@ import turtle
 t = turtle.Turtle()
 s = turtle.Screen()
 s.bgcolor("black")
-t.pencolor("white")
+t.pencolor("chocolate")
 
-a = 0  # Starting size of the side of the square
-b = 90  # Always turn 90 degrees to form a square
+width = 0  # Starting width of the rectangle
+height = 0  # Starting height of the rectangle
 t.speed(0)
 t.penup()
-t.goto(-970, 530)  # Start from top-left corner to form the square
+t.goto(-970, 530)  # Start from the top-left corner
 t.pendown()
-t.fillcolor("aqua")
+t.fillcolor("chocolate")
 t.shape("turtle")
-while True:
-    for _ in range(4):  # Draw four sides of a square
-        t.forward(a)  # Move forward by the length of a (side of the square)
-        t.right(b)  # Turn 90 degrees after each side
-    a += 10  # Increase the side length to make the square grow large
+t.shapesize(stretch_len=20, stretch_wid=20)
 
-    if a > 1000:  # Stop once the square gets big enough
+while True:
+    for _ in range(2):  # Draw two pairs of sides for the rectangle
+        t.forward(width)  # Move forward by the width
+        t.right(90)  # Turn 90 degrees
+        t.forward(height)  # Move forward by the height
+        t.right(90)  # Turn 90 degrees again
+    width += 10  # Increase the width of the rectangle
+    height += 5  # Increase the height of the rectangle (slower growth)
+    
+    if width > 2000:  # Stop once the width reaches a certain size
         break
 
 t.hideturtle()

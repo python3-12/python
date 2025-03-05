@@ -13,7 +13,7 @@ t.goto(-970, 530)  # Start from the top-left corner
 t.pendown()
 t.fillcolor("chocolate")
 t.shape("turtle")
-t.shapesize(stretch_len=20, stretch_wid=20)
+
 
 while True:
     for _ in range(2):  # Draw two pairs of sides for the rectangle

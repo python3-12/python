@@ -2,11 +2,12 @@ import turtle
 
 t = turtle.Turtle()
 s = turtle.Screen()
-s.bgcolor("black")
+s.bgcolor("pink")
 t.pencolor("white")
+t.pensize("5")
 
 a = 0  # Starting size of the side of the square
-b = 10  # Always turn 90 degrees to form a square
+b = 15  # Always turn 90 degrees to form a square
 t.speed(0)
 t.penup()
 t.goto(0, 0)  # Start from top-left corner to form the square
@@ -37,7 +38,27 @@ while True:
         t.color("navy")
     if a > 90:
         t.color("cyan")
-    if a > 100:  # Stop once the square gets big enough
+    if a > 100:
+        t.color("black")
+    if a > 105:
+        t.color("white")
+    if a > 110:
+        t.color("yellow")
+    if a > 115:
+        t.color("red")
+    if a > 120:
+        t.color("orange")
+    if a > 125:
+        t.color("blue")
+    if a > 130:
+        t.color("gray")
+    if a > 135:
+        t.color("sky blue")
+    if a > 140:
+        t.color("navy")
+    if a > 145:
+        t.color("cyan")
+    if a > 150:  # Stop once the square gets big enough
         break
 
 t.hideturtle()

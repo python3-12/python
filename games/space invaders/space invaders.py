@@ -1,4 +1,5 @@
 # importing the moduels
+import time
 import turtle
 import math
 import random
@@ -15,9 +16,12 @@ wn.screensize(800, 800) #  we did this
 width = wn.window_width() // 2  #  Half width for borders  --> We did this
 height = wn.window_height() // 2  #  Half height for borders  --> we did this
 wn.bgcolor("black")
-
+wn.bgpic(r"c:\Users\joe\OneDrive\Pictures\game backgrounds\space_background.gif")
 
 wn.title("SPACE INVADERS")
+#wn.register_shape(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\spaceinvaders-videogames.gif")
+wn.addshape(r"spaceinvaders\img\player.gif")
+wn.addshape(r"spaceinvaders\img\enemy_spaceship.gif")
 
 turtle.tracer(0)
 
@@ -27,7 +31,7 @@ wn._root.attributes('-fullscreen', True)
 # drawing the border
 border_pen = turtle.Turtle()
 border_pen.speed(0)
-border_pen.color("white")
+border_pen.color("blue")
 border_pen.penup()
 border_pen.setposition(-width, -height)  #  we added this
 # border_pen.setposition(-300, -300)
@@ -55,7 +59,7 @@ scorepen.hideturtle()
 # creating the player
 player = turtle.Turtle()
 player.color("blue")
-player.shape("triangle")
+player.shape(r"spaceinvaders\img\player.gif")
 #player.shape("player.gif")
 player.penup()
 player.speed(0)
@@ -78,7 +82,8 @@ enemynumber = 0
 for enemy in enemies:
     enemy.color("maroon")
     enemy.shape('circle')
-     
+    enemy.shape(r"spaceinvaders\img\enemy_spaceship.gif")
+    # enemy.shape("c:\Users\joe\OneDrive\Pictures\what.jpg")   
     enemy.penup()
     enemy.speed(0)
     x = enemystartx + (100 * enemynumber)
@@ -93,15 +98,6 @@ for enemy in enemies:
     enemy.setposition(x,y)
 
 enemyspeed = 0.2
-#creat the bomb
-bomb = turtle.Turtle()
-bomb.color("silver")
-bomb.shape("darkblue")
-
-bomb.speed(0)
-bomb.penup()
-
-bomb_spawn_time = 0  # Time until the next bomb spawns
 
 # create the bullet
 bullet = turtle.Turtle()
@@ -117,12 +113,8 @@ bulletspeed = 20
 bulletstate = "ready"
 
 
-def spawn_bomb():
-    x = random.randint(-width, width)  # Random x position
-    y = height - random.randint(50, 300)  # Random y position above the bottom border
-    bomb.setposition(x, y)  # Set the bomb's position
-    bomb.showturtle() 
-spawn_bomb()
+
+
 # turning left and right
 def move_left():
     x = player.xcor()
@@ -151,7 +143,8 @@ def fire_bullet():
         y = player.ycor() + 10
         bullet.setposition(x,y)
         bullet.showturtle()
-        
+        sound = pygame.mixer.Sound(r"spaceinvaders\sound\lazer.mp3")
+        sound.play()
 def iscolision(t1,t2):
     distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(), 2) + math.pow(t1.ycor()-t2.ycor(),2))
     if distance < 15:
@@ -180,19 +173,7 @@ turtle.onkey(byebye,"Escape")
 while True:
     if wn._root.winfo_exists():  #  Check if the window exists
         wn.update()
-        if iscolision(bullet, bomb):
-            bomb.hideturtle()  # Hide the bomb when hit
-            bullet.hideturtle()  # Hide the bullet as well
-            bulletstate = "ready"  # Reset bullet state
-            spawn_bomb()
-            # Move nearby enemies off-screen
-            for enemy in enemies:
-                if iscolision(enemy, bomb):
-                    enemy.setposition(0, 10000)  # Move enemy off-screen
-                    score += 20
-                    scorestring = "Score: %s"%score
-                    scorepen.clear()
-                    scorepen.write(scorestring, False, align="left",font=("Arial",23,"normal"))
+
 
         for enemy in enemies:
             #   move the enemy
@@ -201,11 +182,12 @@ while True:
             enemy.setx(x)
 
             if enemy.ycor() < player.ycor():
-                print("bye")
-                
-                player.hideturtle()
-                enemy.hideturtle()
-                print("GAME OVER")
+                sound = pygame.mixer.Sound(r"spaceinvaders\sound\explosion.mp3")
+                sound.play()
+                wn.clear()
+                border_pen.goto(0,0)
+                border_pen.write('GAME OVER',align="Center",font=("Courier",70,"normal"))
+                time.sleep(2)
                 turtle.bye()
                 break
 
@@ -232,29 +214,21 @@ while True:
                 scorestring = "Score: %s"%score
                 scorepen.clear()
                 scorepen.write(scorestring, False, align="left",font=("Arial",23,"normal"))
-                
+                sound2 = pygame.mixer.Sound(r"spaceinvaders\sound\explosion.mp3")
+                sound2.play()
             if iscolision(player, enemy):
-                print("hy")
-               
-                player.hideturtle()
-                enemy.hideturtle()
+                sound = pygame.mixer.Sound(r"spaceinvaders\sound\explosion.mp3")
+                sound.play()
+                wn.clear()
+                border_pen.goto(0,0)
+                border_pen.write('GAME OVER',align="Center",font=("Courier",70,"normal"))
+                time.sleep(2)
                 turtle.bye()
-                print("GAME OVER")
                 break
 
             
 
-        #  if enemy.xcor() > 280:
-        #      y = enemy.ycor()
-        #      y -= 40
-        #      enemyspeed *= -1
-        #      enemy.sety(y)
-        
-        #  if enemy.xcor() < -280:
-        #      y = enemy.ycor()
-        #      y -= 40
-        #      enemyspeed *= -1
-        #      enemy.sety(y)
+
 
         # move the bullet
         if bulletstate == "firing":
@@ -262,10 +236,9 @@ while True:
             y += bulletspeed
             bullet.sety(y)
 
-        if bullet.ycor() > height: #  --> we did this
+        if bullet.ycor() > height:  
         # if bullet.ycor() > 275:
             bullet.hideturtle()
             bulletstate = "ready"
     else:
         break  #  Exit the loop if the window is closed
-

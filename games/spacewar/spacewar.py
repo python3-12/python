@@ -1,398 +1,376 @@
 import os
 import random
+from tkinter import messagebox
+
+#Import the turtle module
 import turtle
-import pygame # type: ignore
-import time
-
-# Initialize pygame mixer
-pygame.mixer.init()
-
-d = input("Do you want instructions\n")
-if d == "yes"or d == "ya" or d == "Yes"or d == "Ya":
-      print("are yoou ready?")
-      print("you have 10 lives")
-      print("kill all enemys(red circles)")
-      print("space to shoot,up arrow to go faster,down arrow for slower and if\nyou press it too many times its reverse,side arrows to shange direction")
-      print("good luck go!!")
-      time.sleep(20.61)
-else:
-      print("here we go!!!")
-      time.sleep(2)
-
-#setting the animation speed, backround color
+#Required on Mac to create turtle window
+turtle.fd(0)
+#Max animation speed
 turtle.speed(0)
-turtle.title("Yosef's Space war")
+#Change the background color of the screen
 turtle.bgcolor("black")
-#turtle.bgpic("starfield.gif")
-#hiding the default turtle
+#Load the background image
+
+#Hide the turtle
 turtle.ht()
-#limiting the memory to 1
+#Set the undo buffer to 1 (to save memory and speed things up)
 turtle.setundobuffer(1)
-#speeding up the animation speed
+#Speed up drawing (Draw every 6 frames)
 turtle.tracer(0)
-#Sprite class
+
+
 class Sprite(turtle.Turtle):
-#telling it that when we define the player that were putting in the shape the color and where
-#the player should spawn
-    def __init__(self,spriteshape,color,startx,starty):
-            turtle.Turtle.__init__(self,shape = spriteshape)
-            self.speed(0)
-            self.penup()
-            self.color(color)
-            self.fd(0)
-            self.goto(startx,starty)
-            self.speed = 1
-
-    def move(self):
-          self.fd(self.speed)
-          if self.xcor() > 290 :
-                 self.rt(60)
-                 self.setx(290)
-
-          if self.xcor() < -290 :
-                 self.rt(60)
-                 self.setx(-290)
-
-          if self.ycor() > 290 :
-                 self.rt(60)
-                 self.sety(290)
-
-          if self.ycor() < -290 :
-                 self.rt(60)
-                 self.sety(-290)
+	def __init__(self, spriteshape, color, startx, starty):
+		turtle.Turtle.__init__(self, shape = spriteshape)
+		self.speed(0)
+		self.penup()
+		self.color(color)
+		self.fd(0)
+		self.goto(startx, starty)
+		self.speed = 0
+		
+	def is_collision(self, other):
+		if (self.xcor() >= (other.xcor() - 20)) and \
+			(self.xcor() <= (other.xcor() + 20)) and \
+			(self.ycor() >= (other.ycor() - 20)) and \
+			(self.ycor() <= (other.ycor() + 20)):
+			return True
+		else:
+			return False
+			
+	def move(self):
+		self.fd(self.speed)
+		
+		if self.xcor() < -290:
+			self.rt(60)
+			self.setx(-290)
+		
+		elif self.xcor() > 290:
+			self.rt(60)
+			self.setx(290)
+			
+		if self.ycor() < -290:
+			self.rt(60)
+			self.sety(-290)		
+		
+		elif self.ycor() > 290:
+			self.rt(60)
+			self.sety(290)
 
 class Player(Sprite):
-    def __init__(self,spriteshape,color,startx,starty):
-            Sprite.__init__(self,spriteshape,color,startx,starty)
-            self.shapesize(stretch_wid=2,stretch_len= 2,outline=None)
-            
-            self.speed = 0
-            self.maxspeed = 15
-            self.lives = 10
-
-    def turn_left(self):
-            self.lt(45)
-
-    def turn_right(self):
-            self.rt(45)
-
-    def accelerate(self):
-            if self.speed > self.maxspeed:  # Check if current speed is less than max speed
-                  self.speed -= 1
-                  turtle.listen()
-            else:
-                  self.speed += 1
-           
-
-    def deccelerate(self):
-            self.speed -=1
-
-    def is_collision(self,other):
-           if (self.xcor() >= (other.xcor() - 20))and \
-           (self.xcor() <= (other.xcor() + 20))and \
-           (self.ycor() >= (other.ycor() - 20))and \
-           (self.ycor() <= (other.ycor() + 20)):
-              return True
-           else:
-            return False
-
-              
+	def __init__(self, spriteshape, color, startx, starty):
+		Sprite.__init__(self, spriteshape, color, startx, starty)
+		self.speed = 0
+		self.lives = 10
+		self.shapesize(stretch_wid=0.6, stretch_len=1.1, outline=None)
+		
+	def turn_left(self):
+		self.lt(45)
+		
+	def turn_right(self):
+		self.rt(45)
+				
+	def accelerate(self):
+		self.speed += 2
+		
+	def decelerate(self):
+		self.speed -= 1
+		
+	def hyperspace(self):
+		
+		x = random.randint(-250, 250)
+		y = random.randint(-250, 250)
+		self.goto(x, y)
+		self.setheading(random.randint(0,360))
+		self.speed *= 0.5
+		
 class Enemy(Sprite):
-    def __init__(self,spriteshape,color,startx,starty):
-            Sprite.__init__(self,spriteshape,color,startx,starty)
-            self.shapesize(stretch_wid=2,stretch_len=2,outline=None)
-            self.speed = 6
-            self.setheading(random.randint(0,360))
+	def __init__(self, spriteshape, color, startx, starty):
+		Sprite.__init__(self, spriteshape, color, startx, starty)
+		self.speed = 1
+		self.setheading(random.randint(0,360))
+		if self.xcor() < -290:
+			self.rt(90)
+			self.setx(-290)
+		
+		elif self.xcor() > 290:
+			self.rt(90)
+			self.setx(290)
+			
+		if self.ycor() < -290:
+			self.rt(90)
+			self.sety(-290)		
+		
+		elif self.ycor() > 290:
+			self.rt(90)
+			self.sety(290)
+		
+		
 class Ally(Sprite):
-    def __init__(self,spriteshape,color,startx,starty):
-            Sprite.__init__(self,spriteshape,color,startx,starty)
-            self.shapesize(stretch_wid=2,stretch_len=2,outline=None)
-            self.speed = 8
-            self.setheading(random.randint(0,360))
-    def move(self):
-          self.fd(self.speed)
-          if self.xcor() > 290 :
-                 self.lt(60)
-                 self.setx(290)
+	def __init__(self, spriteshape, color, startx, starty):
+		Sprite.__init__(self, spriteshape, color, startx, starty)
+		self.speed = 3
+		self.setheading(random.randint(0,360))
+		
+	def move(self):
+		self.fd(self.speed)
+		
+		degrees = random.randint(20, 60)
+		
+		if self.xcor() < -290:
+			self.lt(degrees)
+			self.setx(-290)
+		
+		elif self.xcor() > 290:
+			self.lt(degrees)
+			self.setx(290)
+			
+		if self.ycor() < -290:
+			self.lt(degrees)
+			self.sety(-290)		
+		
+		elif self.ycor() > 290:
+			self.lt(degrees)
+			self.sety(290)
+			
+	def avoid(self, other):
+		if (self.xcor() >= (other.xcor() -40)) and \
+			(self.xcor() <= (other.xcor() + 40)) and \
+			(self.ycor() >= (other.ycor() -40)) and \
+			(self.ycor() <= (other.ycor() + 40)):	
+			self.lt(30)	
 
-          if self.xcor() < -290 :
-                 self.lt(60)
-                 self.setx(-290)
 
-          if self.ycor() > 290 :
-                 self.lt(60)
-                 self.sety(290)
+class Bullet(Sprite):
+	def __init__(self, spriteshape, color, startx, starty):
+		Sprite.__init__(self, spriteshape, color, startx, starty)
+		self.shapesize(stretch_wid=0.2, stretch_len=0.4, outline=None)
+		self.status = "ready"
+		self.speed = 20
+		
+	def fire(self):
+		if self.status == "ready":
+			self.status = "shoot"
+		
+	def move(self):
+		if self.status == "ready":
+			self.hideturtle()
+			#Move the turtle offscreen
+			self.goto(-1000,1000)
+		
+		if self.status == "shoot":
 
-          if self.ycor() < -290 :
-                 self.lt(60)
-                 self.sety(-290)
-class Missle(Sprite):
-    def __init__(self,spriteshape,color,startx,starty):
-            Sprite.__init__(self,spriteshape,color,startx,starty)
-            self.shapesize(stretch_wid= 0.2,stretch_len= 0.4,outline=None)
-            self.speed = 45
-            self.goto(1000,-1000)
-            self.status = "ready"
-    def fire(self):
-          if self.status == "ready":
-            #      sound = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\lazer.mp3")
-            #      sound.play()
-                 self.goto(player.xcor(),player.ycor())
-                 self.setheading(player.heading())
-                 self.status = "firing"
+			self.goto(player.xcor(), player.ycor())
+			self.setheading(player.heading())
+			self.showturtle()
+			self.status = "firing"
+		
+		if self.status == "firing":
+			self.fd(self.speed)
+			
+		
+		#Border Check	
+		if self.xcor() < -290 or self.xcor() > 290 \
+			or self.ycor() < -290 or self.ycor() > 290:
+			self.status = "ready"			
+			
+class Particle(Sprite):
+	def __init__(self, spriteshape, color, startx, starty):
+		Sprite.__init__(self, spriteshape, color, -1000, -1000)
+		self.frame = 0
+		self.shapesize(stretch_wid=0.1, stretch_len=0.1, outline=None)
+		
+	def explode(self, startx, starty):
+		turtle.tracer(8)
+		self.goto(startx, starty)
+		self.setheading(random.randint(0, 360))
+		self.frame = 1
 
-    def move(self):
-         if self.status == "firing":
-               self.fd(self.speed)
-         if self.xcor() < -290 or self.xcor() > 290 or self.ycor() < -290 or \
-                self.ycor() > 290:
-                self.goto(-1000,1000)
-                self.status = "ready"
-         if self.status == "ready":
-               self.goto(-1000,1000)
-    def is_collision(self,other):
-           if (self.xcor() >= (other.xcor() - 20))and \
-           (self.xcor() <= (other.xcor() + 20))and \
-           (self.ycor() >= (other.ycor() - 20))and \
-           (self.ycor() <= (other.ycor() + 20)):
-              return True
-           else:
-              return False
+		
+	def move(self):
+		if self.frame != 0:
+			self.fd(18-self.frame)
+			self.frame += 1
+			
+			if self.frame < 6:
+				self.shapesize(stretch_wid=0.3, stretch_len=0.3, outline=None)
+			elif self.frame < 11:
+				self.shapesize(stretch_wid=0.2, stretch_len=0.2, outline=None)
+			else:
+				self.shapesize(stretch_wid=0.1, stretch_len=0.1, outline=None)
+			
+			if self.frame > 18:
+				self.frame = 0
+				self.goto(-1000, -1000)
+				turtle.tracer(6)
+						
 class Game():
-       def __init__(self):
-              self.level = 1
-              self.score = 0
-              self.state = "playing"
-              self.pen = turtle.Turtle()
-              self.lives = 10
-       def draw_border(self):
-              self.pen.speed(0)
-              self.pen.color("white")
-              self.pen.pensize(3)
-              self.pen.penup()
-              self.pen.goto(-300,300)
-              self.pen.pendown()
-              for side in range(4):
-                     self.pen.fd(600)
-                     self.pen.rt(90)
-              self.pen.penup()
-              self.pen.ht()
-              self.pen.pendown()
-       def show_status(self):
-            self.pen.undo()
-            msg = "Score: %s" % (self.score)
-            self.pen.penup()
-            self.pen.goto(-300, 300)
-            self.pen.write(msg, font=("Arial", 16, "normal"))
+	def __init__(self):
+		self.level = 1
+		self.score = 0
+		self.state = "splash"
+		self.pen = turtle.Turtle()
+		self.lives = 10
+		
+	def draw_border(self):
+		#Draw Border
+		self.pen.speed(0)
+		self.pen.color("white")
+		self.pen.pensize(3)
+		self.pen.penup()
+		self.pen.goto(-300, 300)
+		self.pen.pendown()
+		for side in range(4):
+			self.pen.fd(600)
+			self.pen.rt(90)
+		self.pen.penup()
+		
+	def show_status(self):
+		self.pen.undo()
+		if game.lives > 0:
+			msg = "Level: %s Lives: %s Score: %s " %(self.level, self.lives, self.score)		
+		else: 
+			msg = "Game Over Score: %s" %(self.score)
+		self.pen.penup()
+		self.pen.goto(-300, 310)
+		self.pen.write(msg, font=("Arial", 16, "normal"))
 
-       def show_level(self):
-            self.pen.undo()
-            h = "Level: %s" % (self.level)
-            self.pen.penup()
-            self.pen.goto(-400, 305)
-            self.pen.write(h, font=("Arial", 16, "normal"))
-
-
-
-class Partical(Sprite):
-    def __init__(self,spriteshape,color,startx,starty):
-            Sprite.__init__(self,spriteshape,color,startx,starty)
-            self.shapesize(stretch_wid= 0.1,stretch_len= 0.1,outline=None)
-            self.goto(-1000,-1000)
-            self.frame = 0
-    def explode(self, startx, starty):
-          self.goto(startx,starty)
-          self.setheading(random.randint(0,360))
-          self.frame = 1
-    def move(self):
-          if self.frame > 0:
-              self.fd(10)
-              self.frame += 1
-          if self.frame > 15:
-                self.frame = 0
-                self.goto(-1000,-1000)
-                
-
+#Create game object
 game = Game()
-game.draw_border()
-game.show_status()and\
-game.show_level()
-# yellow, gold, orange, red, maroon, violet, magenta, purple, navy, blue, skyblue, cyan, turquoise, lightgreen, green, darkgreen, chocolate, brown, black, gray, white,lime,aqua,lavender,lightblue,lightgreen,silver,teal,lightyellow.
-# ally = Ally("square","blue",0,0)
-player = Player("classic","aqua",0,0)
-#enemy = Enemy("circle","red",-100,0)
-missle = Missle("triangle","gold",0,0)
-enemies = []
-allies = []
-particales = []
-for h in range(20):
-      particales.append(Partical("square","orange",0,0))
-for i in range(8):
-      enemies.append(Enemy("classic","red",-100,0))
-for j in range(10):
-#      ally = Ally("classic","violet",100,0)
-      allies.append(Ally("classic","violet",100,0))
 
-turtle.onkey(player.turn_left,"Left")
-turtle.onkey(player.turn_right,"Right")
-turtle.onkey(player.accelerate,"Up")
-turtle.onkey(player.deccelerate,"Down")
-turtle.onkey(missle.fire,"space")
+#Draw the game border
+game.draw_border()
+
+#Show the level and score
+game.show_status()
+
+#Create player and enemy objects
+player = Player("triangle", "white", 0.0, 0.0)
+#enemy = Enemy("circle", "red", 100.0, 0.0)
+bullet = Bullet("triangle", "yellow", 0.0, 0.0)
+#ally = Ally("square", "blue", 100, 100)
+
+#Keyboard Bindings
+turtle.onkey(player.turn_left, "Left")
+turtle.onkey(player.turn_right, "Right")
+turtle.onkey(player.accelerate, "Up")
+turtle.onkey(player.hyperspace, "Down")
+turtle.onkey(bullet.fire, "space")
 turtle.listen()
 
-while True:
-        time.sleep(0.05)
-        turtle.update()
-        player.move()
-        missle.move()
-        if player.speed > player.maxspeed:  # Check if current speed is less than max speed
-                  player.speed -= 1
-                  turtle.listen()
-        
-        for enemy in enemies:
-              enemy.move()
-       
-              if player.is_collision(enemy):
-                     x = random.randint(-250,250)
-                     y = random.randint(-250,250)
-                     enemy.goto(x,y)
-                     game.score -= 2
-                     game.show_status()
-                     game.lives -= 1
-                     if game.lives < 1:
-                           print('game over')
-                           turtle.bye()
-                     if game.lives < 1:
-                           break
-                     if game.score < -10:
-                           print('game over')
-                           turtle.bye()
-                     if game.score < -10:
-                           break
-              if missle.is_collision(enemy):
-            #     sound = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\explosion.mp3")
-            #     sound.play()
-                x = random.randint(-250,250)
-                y = random.randint(-250,250)
-                enemy.goto(x,y)
-                missle.status = "ready"
-                game.score += 2
-                game.show_status()
-                for partical in particales:
-                      partical.explode(missle.xcor(),missle.ycor())
-                if game.score < 10 :
-                  game.level = 1
-                if game.score > 19 :
-                  game.level = 2
-                  p = []
-                  for q in range(2):
-                        enemies.append(Enemy("circle","red",-100,0))
-                if game.score > 19 :
-                  game.level = 3
-                  bv = []
-                  for q in range(2):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 29 :
-                        game.level = 4
-                        f = []
-                        for q in range(2):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score >  39:
-                        game.level = 5
-                                    
-                        p = []
-                        for q in range(3):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 49  :
-                        game.level = 6
-                                    
-                        l = []
-                        for q in range(3):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 59 :
-                        game.level = 7
-                                    
-                        o = []
-                        for q in range(3):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 69 :
-                        game.level = 8
-                                    
-                        k = []
-                        for q in range(4):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 79 :
-                        game.level = 9
-                                    
-                        b = []
-                        for q in range(4):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 89 :
-                        game.level = 10
-                                    
-                        e = []
-                        for q in range(4):
-                              enemies.append(Enemy("circle","red",-100,0))
-                  if game.score > 99:
-                        turtle.bye
-                        print("congradulations, you beat space war!!! so ")
-             
-                
-               
-                     
-                          
-                     
-        for ally in allies:
-              ally.move()
-              if missle.is_collision(ally):
-                x = random.randint(-250,250)
-                y = random.randint(-250,250)
-                ally.goto(x,y)
-                missle.status = "ready"
-                game.score -= 1
-                game.show_status()and show_level()
-        for partical in particales:
-              partical.move()
-              
-        if player.is_collision(enemy):
-                
-            #     soundl = pygame.mixer.Sound(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\Music files\explosion.mp3")
-            #     soundl.play()
-                x = random.randint(-250,250)
-                y = random.randint(-250,250)
-                enemy.goto(x,y)
-                game.score -= 2
-                game.show_status()and show_level()
-                game.lives -= 1
-                if game.lives < 1:
-                     
-                     print('game over')
-                     break
-                
-        if missle.is_collision(enemy):
-                x = random.randint(-250,250)
-                y = random.randint(-250,250)
-                enemy.goto(x,y)
-                missle.status = "ready"
-                game.score += 10
-                game.show_status()and show_level()
-        if missle.is_collision(ally):
-                x = random.randint(-250,250)
-                y = random.randint(-250,250)
-                ally.goto(x,y)
-                missle.status = "ready"
-                game.score -= 1
-                game.show_status()and show_level()
-                
-        def show_level():
-             game.pen.undo()
-             h = "level:%s"%(game.level)
-             game.pen.penup()
-             game.pen.goto(-320,300)
-             game.pen.write(h, font= ("Jack",20,"normal"))
-                               
-                         
-              
+#Set up the game
+#Create lists for sprites
+#Add Enemies
+if game.state == "splash":
+	enemies = []
 
-       
-delay = input("press Enter to finish.")
+	for e in range(6):
+		x = random.randint(-200, 200)
+		y = random.randint(-200, 200)
+		enemies.append(Enemy("circle", "red", x, y))
+
+	#Add Allies
+	allies = []
+	for a in range(6):
+		x = random.randint(-200, 200)
+		y = random.randint(-200, 200)
+		allies.append(Ally("square", "blue", x, y))
+		
+	particles = []
+
+	for p in range(2):
+		particles.append(Particle("circle", "yellow", -1000, -1000))
+	for p in range(2):
+		particles.append(Particle("circle", "red", -1000, -1000))
+	for p in range(2):
+		particles.append(Particle("circle", "orange", -1000, -1000))
+
+
+
+	game.state = "playing"
+
+while True:
+	turtle.update()
+	if game.state == "restart":
+		game.lives = 10
+		game.score = 0
+		player.speed = 0
+		player.goto(0,0)
+		player.setheading(0)
+
+		for enemy in enemies:
+			enemy.goto(random.randint(-200, 200), random.randint(-200, 200))
+
+		for ally in allies:
+			ally.goto(random.randint(-200, 200), random.randint(-200, 200))	
+		
+		game.state = "playing"
+	
+	if game.state == "playing":
+		player.move()
+		bullet.move()
+	
+		for enemy in enemies:	
+			enemy.move()
+
+			#Check collisions
+			if player.is_collision(enemy):
+
+				player.color("red")
+				for particle in particles:
+					particle.explode(enemy.xcor(), enemy.ycor())
+				player.rt(random.randint(100, 200))
+				enemy.goto(random.randint(-200, 200), random.randint(-200, 200))	
+				enemy.speed += 1
+				game.lives -= 1
+				if game.lives < 1:
+					game.state = "gameover"
+				game.show_status()
+				player.color("white")
+		
+			if bullet.is_collision(enemy):
+
+				for particle in particles:
+					particle.explode(enemy.xcor(), enemy.ycor())
+					
+				bullet.status = "ready"
+				enemy.goto(random.randint(-200, 200), random.randint(-200, 200))	
+				enemy.speed += 1
+				game.score += 100
+				game.show_status()
+			
+		for ally in allies:
+			ally.move()
+			
+			#Avoid enemy
+			for enemy in enemies:	
+				ally.avoid(enemy)
+			
+			#Allies should avoid player as well	
+			ally.avoid(player)
+	
+			#Check collisions
+			if bullet.is_collision(ally):
+
+				for particle in particles:
+					particle.explode(ally.xcor(), ally.ycor())
+				bullet.status = "ready"
+				ally.goto(random.randint(-200, 200), random.randint(-200, 200))	
+				ally.speed += 1
+				game.score -= 50
+				game.show_status()
+				
+	for particle in particles:
+		particle.move()
+				
+	if game.state == "gameover":
+		for i in range(360):
+			player.rt(1) 
+		
+		if messagebox.askyesno("Game Over", "Play again?") == True:
+			game.state = "restart"
+		else:
+			exit()		
+		
+	

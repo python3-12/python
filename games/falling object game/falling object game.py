@@ -1,19 +1,28 @@
 import turtle
 import random
+import pygame#type ignore
+import time
+from datetime import datetime
+
+pygame.mixer.init()
 
 score = 0
 lives = 10
 
 wn = turtle.Screen()
 wn.title("falling objects game")
-wn.bgcolor("green")
+wn.bgcolor("blue")
+wn.bgpic(r"the-sky-is-falling\img\background\forest.gif")
 wn.setup(width=800,height=600)
 wn.tracer(14)
+wn.addshape(r"the-sky-is-falling\img\\deer_right.gif")
+wn.addshape(r"the-sky-is-falling\img\acorn.gif")
+wn.addshape(r"the-sky-is-falling\img\hunter_right.gif")
 
 
 player = turtle.Turtle()
 player.speed(0)
-player.shape("square")
+player.shape(r"the-sky-is-falling\img\deer_right.gif")
 player.color("white")
 player.penup()
 player.goto(0,-250)
@@ -23,10 +32,12 @@ good_guys = []
 for _ in range(20):
     good_guy = turtle.Turtle()
     good_guy.speed(0)
-    good_guy.shape("circle")
+    good_guy.shape(r"the-sky-is-falling\img\acorn.gif")
     good_guy.color("blue")
     good_guy.penup()
-    good_guy.goto(-100,250)
+    x = random.randint(-380,380)
+    y = random.randint(300,400)
+    good_guy.goto(x,y)
     good_guy.speed = random.randint(1, 4)
     good_guys.append(good_guy)
 
@@ -35,10 +46,12 @@ bad_guys = []
 for _ in range(20):
     bad_guy = turtle.Turtle()
     bad_guy.speed(0)
-    bad_guy.shape("circle")
+    bad_guy.shape(r"the-sky-is-falling\img\hunter_right.gif")
     bad_guy.color("red")
     bad_guy.penup()
-    bad_guy.goto(100,250)
+    x = random.randint(-380,380)
+    y = random.randint(300,400)
+    bad_guy.goto(x,y)
     bad_guy.speed = random.randint(1, 4)
     bad_guys.append(bad_guy)
 
@@ -46,11 +59,11 @@ for _ in range(20):
 pen = turtle.Turtle()
 pen.speed(0)
 pen.shape("square")
-pen.color("white")
+pen.color("black")
 pen.hideturtle()
 pen.penup()
 pen.goto(0,260)
-font = ("Courier",24,"normal")
+font = ("Courier",30,"normal")
 pen.write("Score:{}  Lives:{}".format(score, lives), align= "Center",font=font)
 
 
@@ -68,11 +81,13 @@ while True:
     wn.update()
     if player.direction == "left":
         x = player.xcor()
-        x -= 3
+        if x > -380:  # Only move left if not at the left edge
+            x -= 3
         player.setx(x)
     if player.direction == "right":
         x = player.xcor()
-        x += 3
+        if x < 380:  # Only move right if not at the right edge
+            x += 3
         player.setx(x)
     for good_guy in good_guys:
         y = good_guy.ycor()
@@ -109,7 +124,19 @@ while True:
             lives -= 1
             pen.clear()
             pen.write("Score:{}  Lives:{}".format(score, lives),align="Center",font=font)
-    if lives <= 1:
+    
+    if player.xcor() <= -380:
+        player.direction = "stop"
+    if player.xcor() >= 380:
+        player.direction = "stop"
+
+    if lives <= 0:
+        sound = pygame.mixer.Sound(r"the-sky-is-falling\sound\explosion.mp3")
+        sound.play()
+        wn.clear()
+        pen.goto(0,0)
+        pen.write('GAME OVER',align="Center",font=("Courier",70,"normal"))
+        time.sleep(2)
         turtle.bye()
         break
 

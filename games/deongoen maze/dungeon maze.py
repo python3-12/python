@@ -1,71 +1,104 @@
+#getting my moduels from my library
 import turtle
 import math
 import random
-import time
+import pygame
 
+
+#initializing the pygame mixer
+pygame.mixer.init()
 
 wn = turtle.Screen()
-wn.bgcolor("brown")
+#choosing the background that will appear on my screen
+wn.bgpic(r"c:\Users\joe\OneDrive\Pictures\game backgrounds\ov25Dl.gif")
+#giving my screen a title
 wn.title("A maze game")
-wn.setup(700,700)
+#setting up my screen's size
+wn.setup(width=1.0, height=1.0)  #  We did this
+wn.screensize(800, 900) #  we did this
+#speeding up the program
 wn.tracer(0)
+#loading all the shapes into turtle so that you can use them
+wn.addshape(r"dungeon-maze\img\player.gif")
+wn.addshape(r"dungeon-maze\img\treasure.gif")
+wn.addshape(r"dungeon-maze\img\wall.gif")
+wn.addshape(r"dungeon-maze\img\enemy.gif")
 
 
+#making my pen class to draw stuff
 class Pen(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
+        #choosing my pen's shape
         self.shape("square")
+        #choosing my pens color
         self.color("black")
+        #making my pen just hide the way it's going to the places it needs to put stuff
         self.penup()
+        #animation speed
         self.speed(0)
 
+#just an added pen class so that I can draw game over at the end
 class Pene(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
+        #choosing the pens shape
         self.shape("square")
+        #choosing the pens color
         self.color("black")
+        #making this pen not just pop up this random line on my screen😑!!
         self.penup()
+        #animation speed
         self.speed(0)
+        #hide this pens shape
         self.hideturtle()
     def display_score(self, score):
         # Clear previous score and write new score at top
         self.clear()
         self.goto(0, 290)  # Position at the top of the screen
         self.write('Gold: {}'.format(score), align="center", font=("Courier", 40, "normal"))
+
+#making my player class
 class Player(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
-        self.shape("square")
-        self.color("blue")
+        #giving my player a shape that I loaded to him
+        self.shape(r"dungeon-maze\img\player.gif")
+        #to not draw a line every where my player has bean
         self.penup()
+        #animation speed
         self.speed(0)
+        #setting the lives variable
         self.lives = 5
+        #setting the gold variable
         self.gold = 0
     def is_collision(self, other):
         a = self.xcor()-other.xcor()
         b = self.ycor()-other.ycor()
+        #making a variable named distance equal to: √(("a" variable**2) + ("b"variable **2))
         distance = math.sqrt((a**2) + (b**2))
+        #if the distance is less then five, then return that it is a collision, anything else it is not a collision
         if distance < 5:
             return True
         else:
             return False
     def go_up(self):
         move_to_x = player.xcor()
-        move_to_y = player.ycor() + 24
+        move_to_y = player.ycor() + 28
         if (move_to_x,move_to_y) not in walls:
             self.goto(move_to_x,move_to_y)
     def go_down(self):
         move_to_x = player.xcor()
-        move_to_y = player.ycor() - 24
+        move_to_y = player.ycor() - 28
         if (move_to_x,move_to_y) not in walls:
             self.goto(move_to_x,move_to_y)
     def go_left(self):
-        move_to_x = player.xcor() - 24
+        move_to_x = player.xcor() - 28
         move_to_y = player.ycor()
         if (move_to_x,move_to_y) not in walls:
             self.goto(move_to_x,move_to_y)
     def go_right(self):
-        move_to_x = player.xcor() + 24
+        move_to_x = player.xcor() + 28
         move_to_y = player.ycor()
         if (move_to_x,move_to_y) not in walls:
             self.goto(move_to_x,move_to_y)
@@ -74,7 +107,7 @@ class Player(turtle.Turtle):
 class Tresure(turtle.Turtle):
     def __init__(self, x, y):
         turtle.Turtle.__init__(self)
-        self.shape("circle")
+        self.shape(r"dungeon-maze\img\treasure.gif")
         self.color("yellow")
         self.penup()
         self.speed(0)
@@ -88,7 +121,7 @@ class Tresure(turtle.Turtle):
 class Enemy(turtle.Turtle):
     def __init__(self, x, y):
         turtle.Turtle.__init__(self)
-        self.shape("circle")
+        self.shape(r"dungeon-maze\img\enemy.gif")
         self.color("red")
         self.penup()
         self.speed(0)
@@ -98,15 +131,15 @@ class Enemy(turtle.Turtle):
     def move(self):
         if self.direction == "up":
             dx = 0
-            dy = 24
+            dy = 28
         elif self.direction == "down":
             dx = 0
-            dy = -24
+            dy = -28
         elif self.direction == "left":
-            dx = -24
+            dx = -28
             dy = 0
         elif self.direction == "right":
-            dx = 24
+            dx = 28
             dy = 0
         else:
             dx = 0
@@ -144,11 +177,9 @@ class Enemy(turtle.Turtle):
 
     
 levels = [""]
-
-
 level_1 = [
     "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
-    "BP BBBBBBB   E             BBE    B    TE  BB  BBBB     E   T  BBB",
+    "BP BBBBBBB   E      BBBBB  BBE    B    TE  BB  BBBB     E   T  BBB",
     "B  BBBBBBB  BBBBBB         BTETB  B   BB   BB    BB   BB  BBB  BBB",
     "B       BB  BBBBBB  BBBBB  BBBBB  B   BB   BB        BBB  BBB  BBB",
     "BBBBB   BB  BBB   E   EBB  B  B   B   BB   BB      EBBBB  BBB  BBB",
@@ -171,9 +202,18 @@ level_1 = [
     "BBB     BBBBB  BBBBB   TB      BBBBBBBBT      BB  BBEEEBBBEEB   BBB",
     "BBB EBB EBBBB  BBBE   B B  BBBBBBBB EB    BBB  BT  E       E   BBB",
     "BBB  BBT       BBB  BBB B      E     B   BBBBBBBBBBBBBBBBBBB  BBBBB", 
-    "BBB  BBBBBBBB  BBBBBBBB B   B   T    B   BBBBBBBBBBBBBBBBBBB  BBBBB",
-    "BBB     E  E        E   B   BBBBBBBBBB  T                      T  B",
+    "BBB  BBBBBBBB  BBBBBBBB B  BB   T    B   BBBBBBBBBBBBBBBBBBB  BBBBB",
+    "BBB     E  E        E      BBBBBBBBBBB  T                      T  B",
     "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"]
+
+
+
+
+
+
+
+
+
 
 tresures = []
 enemys = []
@@ -186,11 +226,11 @@ def setup_maze(level):
     for y in range (len(level)):
         for x in range (len(level[y])):
             charecter = level[y][x]
-            screen_x = -288 + (x* 24)
-            screen_y = 288 - (y*24)
+            screen_x = -900 + (x* 28)
+            screen_y = 288 - (y*28)
             if charecter == "B":
                 pen.goto(screen_x,screen_y)
-                pen.shape("square")
+                pen.shape(r"dungeon-maze\img\wall.gif")
                 pen.stamp()
                 walls.append((screen_x,screen_y))
             if charecter == "P":
@@ -230,13 +270,10 @@ while True:
             tresures.remove(tresure)
     for enemy in enemys:
         if player.is_collision(enemy):
-            wn.clear()
-            pen.goto(0,0)
-            pene.goto(0,140)
-            pene.write('PLAYERGOLD:{}'.format(player.gold),align="Center",font=("Courier",55,"normal"))
-            pen.write('GAME OVER'.format(),align="Center",font=("Courier",70,"normal"))
-            time.sleep(5)
+            sound = pygame.mixer.Sound(r"dungeon-maze\sound\explosion.mp3")
+            sound.play()
             turtle.bye()
+            print('PLAYERGOLD:{}'.format(player.gold))
             break
     
     wn.update()

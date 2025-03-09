@@ -16,7 +16,7 @@ wn.screensize(800, 800) #  we did this
 width = wn.window_width() // 2  #  Half width for borders  --> We did this
 height = wn.window_height() // 2  #  Half height for borders  --> we did this
 wn.bgcolor("black")
-wn.bgpic(r"c:\Users\joe\OneDrive\Pictures\game backgrounds\space_background.gif")
+wn.bgpic(r"spaceinvaders\img\backgrounds\spacebackground.gif")
 
 wn.title("SPACE INVADERS")
 #wn.register_shape(r"C:\Users\joe\OneDrive\Documents\python\Joe Games\spaceinvaders-videogames.gif")

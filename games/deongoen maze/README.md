@@ -1,6 +1,6 @@
 this is how it looks at the end:
 
-![image](https://github.com/user-attachments/assets/dad0152e-a9a5-4496-8131-f3c935c8a2e1)
+https://github.com/user-attachments/assets/48e0de1a-172f-438d-9044-f3031f7ee6e9
 
 pretty sick right?
 

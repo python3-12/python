@@ -11,8 +11,7 @@ some sites that can help you with python is my github and
 [w3schools.com
 ](https://www.w3schools.com/)
 
-#            ↑
-#            ↓
+# 
 https://github.com/user-attachments/assets/09cb54e2-6e12-4dfc-a0bb-1d53bdde569e
 
 

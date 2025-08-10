@@ -27,7 +27,7 @@ questions = [
         "answer": "charmander"
     },
     {
-        "question": "what pokemon is small, amphibian, and a plant Pokémon that move on all four legs?",
+        "question": "what pokemon is small, amphibian, and the first pokemon in the pokedex?",
         "answer": "bulbasaur"
     },
     {
@@ -37,17 +37,61 @@ questions = [
     {
         "question": "what pokemon has the power to control space, is a water and dragon type, and is weak to dragon and fairy tipe attacks?",
         "answer": "palkia"
+    },
+    {
+        "question": "what pokemon is a  large, dragon-like Pokémon, has two large wings with teal undersides and a flame burning at the tip of its tail?",
+        "answer": "charizard"
+        
+    },
+    
+    {
+        "question": "what pokemon has whiskers, black-and-brown ears, and a curled tail?",
+        "answer": "meowth"
+        
+    },
+    {
+        "question": "what pokemon is constantly sleeping?",
+        "answer": "snorlax"
+    },
+    {
+        "question": "what pokemon has a rocky head and body, strong arms, and the ability to camouflage itself as a rock?",
+        "answer": "geodude"
+    },
+    {
+        "question": "what pokemon has a hardened, rock-like exterior and has an ability to roll into a ball and move at high speeds?",
+        "answer": "golem"
+    },
+    {
+        "question": "what pokemon has six tails and is a fox-like Pokémon with reddish-brown fur?",
+        "answer": "vulpix"
+    },
+    {
+        "question": "what pokemon is round with spikes on its back, is a ghost and poison type and is very mischievous?",
+        "answer": "gengar"
+    },
+    {
+        "question": "what pokemon has an appearance that combines traits of tigers and lions, with orange fur, black stripes, and cream-colored tufts?",
+        "answer": "arcanine"
+    },
+    {
+        "question": "what pokemon has blue fur, black appendages on its head, and a canine-like appearance?",
+        "answer": "lucario"
+    },
+    {
+        "question": "what pokemon is a large, orange-skinned Pokémon with a friendly, dragon-like appearance",
+        "answer": "dragonite"
     }
 ]
+
 
 # Shuffle the questions
 random.shuffle(questions)
 
 # Loop through each question
-for q in questions:
+for question in questions:
     while True:
-        user_answer = input(q["question"] + " ").strip().lower()
-        if user_answer == q["answer"]:
+        user_answer = input(question["question"] + "\n").strip().lower()
+        if user_answer == question["answer"]:
             print("Correct!")
             break
         else:

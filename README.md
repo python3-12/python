@@ -8,8 +8,7 @@ you can use python for many things, games, error solving, learning the basics of
 
 some sites that can help you with python is my github and
 
-[https://www.w3schools.com/python
-](https://www.w3schools.com/python/default.asp)
+(https://www.w3schools.com/python/default.asp)
 # 
 https://github.com/user-attachments/assets/09cb54e2-6e12-4dfc-a0bb-1d53bdde569e
 

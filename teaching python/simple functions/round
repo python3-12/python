@@ -1,0 +1,13 @@
+round is a very simple and helpful function used in order to round a number.
+here is an example of round:
+round(3.14159, 2)
+
+the 3.14159 is the first value, wich describes the number wich you would like to round.
+the 2 is the second value, wich describes to wich decimal. 
+2 would mean the SECOND decimal, wich would round this number to 3.14. 
+4 would mean the FOURTH decimal, wich would round the number to 3.1416.
+
+but, the second value is not needed.
+if you do not put anything for the second value, than it will round to the nearest whole integer. In this case, 3.
+
+hope you have fun with the round function!

@@ -7,3 +7,8 @@ remember def?  well, these are functions too!
 these functions can be used in print and input too. for example:
 
 print(round(-15)
+
+also, these functions can be used with variables, for excample:
+
+x = 6.45
+int(x)

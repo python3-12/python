@@ -1,0 +1,13 @@
+if you need to know the type, then use type!
+
+(examples of types: integer, string, float, boolean)
+
+type finds the type. for example: 
+
+type(335.1253)
+
+in this case, type would return 'int' wich stands for integer. if I put false in the perenthasis, it would say bool for boolean.
+if I put a string in the perenthasis(string: writing with quetation marks around it) than it would say str for string. 
+
+
+

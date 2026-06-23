@@ -1,0 +1,7 @@
+int stands for integer.
+
+so, have you got a number like 3.78, but you only want the whole number? well, thats EXACTLY what int does.
+
+int(3.45)
+
+in the example above, int would find the whole number. 

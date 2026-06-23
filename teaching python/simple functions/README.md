@@ -1,1 +1,1 @@
-* ## Welcome to simple functions!! ## *
+## Welcome to simple functions!!

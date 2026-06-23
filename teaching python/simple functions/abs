@@ -1,0 +1,12 @@
+want a number to be absolute? Well lucky for you, there is a function called...
+ABS
+
+abs(-540)
+
+abs changes numbers to their absolute (positive) form. in this example, -540 would become 540.
+
+this also works for variables. say you got a variable that is called x and it is equal to -124.
+
+abs(x)
+
+this will find the absolute value of x, wich makes x 124.

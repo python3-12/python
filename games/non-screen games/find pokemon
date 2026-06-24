@@ -1,0 +1,65 @@
+from tcgdexsdk import TCGdex, Query
+
+tcgdex = TCGdex()
+
+while True:
+    j = input(
+        "\nFind all cards of a Pokémon or a specific card by ID?\n"
+        "1 = All cards of a Pokémon\n"
+        "2 = Specific card by ID\n"
+        "Choice: "
+    )
+
+    if j == "2":
+        card_id = input("Enter the Card ID (e.g., swsh3-136): ")
+
+        print(f"Fetching data for {card_id}...")
+
+        try:
+            card = tcgdex.card.getSync(card_id)
+
+            if card:
+                print("-" * 30)
+                print(f"CARD: {card.name}")
+                print(f"SET: {card.set.name}")
+                print(f"TYPE: {card.types}")
+                print(f"RARITY: {card.rarity}")
+                print(f"HP: {card.hp}")
+                print(f"ATTACKS: {card.attacks}")
+                print(f"ABILITIES: {card.abilities}")
+                print(f"VARIANTS: {card.variants}")
+            else:
+                print("Card not found.")
+
+        except Exception as e:
+            print("Error:", e)
+
+    elif j == "1":
+        pokemon_name = input(
+            "Enter the Pokémon name (e.g., Pikachu): "
+        )
+
+        print(f"Searching for '{pokemon_name}'...")
+
+        try:
+            results = tcgdex.card.listSync(
+                Query().equal("name", pokemon_name)
+            )
+
+            if not results:
+                print("No cards found.")
+            else:
+                print(f"\nFound {len(results)} cards:")
+                for card_preview in results:
+                    card = tcgdex.card.getSync(card_preview.id)
+                    print(
+                        f"Card: {card.name} | "
+                        f"Set: {card.set.name} | "
+                        f"ID: {card.id}"
+                    )
+
+        except Exception as e:
+            print("Error:", e)
+
+    else:
+        print("Please enter 1 or 2.")

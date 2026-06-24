@@ -1,0 +1,72 @@
+from time import sleep
+player = True
+axe = False
+print("welcome to STORYS!!!")
+run = True
+while True:
+    wte = input("once opon a time, there lived a young traveler.(the traveler is you)\nhe wanted to go exploring, but he didn't no where.\nplease select where you want to travel:\n1.forest\n2.ocean\n3.dessert\nplease select 1, 2, or 3\n")
+    if wte == "1":
+        while run:
+            print("Oh, so you want to explore the forest. be careful of bears!")
+            fork = input("when you get to the forest you see 3 paths. please select 1, 2, or 3\n")
+            if fork == "1":
+                if axe == True:
+                    print("this would be impossible, but luckily, you have an axe to chop down the thorns blocking your way.")
+                    input("as you continue walking, you see a clearing. in the clearing")
+                else:
+                    print("there are many thorns! you need something to chop them down. choose another path.")
+            if fork == "3":
+                print("as you continue walking, you see a shiny object stuck in the ground. an axe! this could be helpful incase somethings in your way! however, it is a dead end, so turn around")
+                axe = True
+            if fork == "2":
+                print("when you walk, it starts to feel dark and gloomy.")
+                l = True
+                while l:
+                    next = input("are you sure you want to continue? 1=yes,2=no\n")
+                    if next == "1":
+                        print("oh no! theres a GOBLIN.😨")
+                        goblin = True
+                        while goblin:
+                            if axe == True:
+                                print("luckily, with that axe from trail 3, you chop up the goblin and survive. after something like that, lets turn back to the start of the forest.")
+                                print("you pick up the goblins spear and turn back.")
+                                goblin = False
+                                l = False
+                            else:
+                                print("shrieck!!!")
+                                print("game over. the goblin killed you.")
+                                sleep(3)
+                                run = False
+                                goblin = False
+                                l = False    
+                    elif next == "2":
+                        break
+                    else:
+                        print("invalid input. please select 1 or 2")
+    elif wte == "2":
+        oc = True
+        while oc:
+            print("so, your a water guy. hope you know how to deal with sharks!")
+            air = input("as you get to the ocean, you dive in and start swimming. once you swim for a while, you notice you forgot your oxygen tank. you start to panic, but then you see a sunken ship. do you want to swim to the ship or try to swim back to shore? please select 1 or 2\n1.swim to ship\n2.swim back to shore\n")
+            if air == "1":
+                print("as you swim to the ship, you notice you cannot hold your breath much longer. you start to feel dizzy and are about to pass out, thats when you get hit by something hard. you open your eyes and see a dolphin looking at you. it must have saved you! the dolphin takes you took you to the ship. thats when you pass out. luckily, the dolphin saves you from drowning. you wake up on the ship, and you have a oxygen tank now. you can now explore the ship safely.")
+                island = input("you look around the ship to see if there is anything useful. you find an extra oxygen tank and some food. you also find a map that shows a nearby island. do you want to go to the island or try to swim back to shore? please select 1 or 2\n1.swim to island\n2.swim back to shore\n")
+                if island == "1":
+                    print("okay! your pretty lucky you found an extra oxegyn tank in the ship though, because other wise you would not survive. the island is very far. your swimin and swimin. a lot of swimming. more swimming😅. after a while, you finally can see the island in view. however, as you get closer, something touches your leg. you think: 'oh no, not a shark!' howerver, it is only A GIANT COLLASSAL SQUID!!!!😓 you finally get to land and you are out of the water. the thing is, collasol squids are huge. so it just tries to grab you with its tentacles. luckilly a leopard seal sees it happening and eats the collasal squid.you just stand there and watch. after the leopard seal is done, it comes for you! it jumps onto the island tries to bite you!")
+                    input("do  you want to ")
+
+            elif air == "2":
+                print("as you try to swim back to shore you notice you won't make it in time. you try to swim upwards to catch a breath, so that you can make it back to shore, but as you swim upwards, you see a shark fin heading straight for you.")
+                input("")
+            else:
+                pass
+
+
+
+    elif wte == "3":
+        while True:
+            print("you have decided to travel into the dessert. be sure to bring water!")
+    else:
+        print("invalid input. please select 1, 2, or 3")
+
+
